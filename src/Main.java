@@ -8,7 +8,22 @@ used to call all the functions
 public class Main {
     public static void main(String[] args) {
 
-        createConsumer();
+        boolean readingCardReceived = false;
+        boolean verificationStatus = false;
+
+        if(readingCardReceived){
+            verificationStatus = enterReadingCard();
+        }
+        else{
+            //addReadingFee;
+            //send staff member
+        }
+        if(verificationStatus){
+            //insert data
+            //send consumer info and water consumption data
+        }
+      //  createConsumer();
+
     }
 
 
@@ -60,25 +75,35 @@ public class Main {
     //public static void updateConDatabase() {
 
 
-
-
-
-        /*
-        Receive reading card
-        A reading card is entered into the system
-         */
-    public static void enterReadingCard(){
+    /*
+    Receive reading card
+    A reading card is entered into the system
+     */
+    public static boolean enterReadingCard() {
+        boolean isVerified = false;
+        double WaterConsumption = 0;
         Scanner in = new Scanner(System.in);
+        while(!isVerified) {
+            System.out.println("Enter the water consumption data: ");
+            System.out.println("Water Used");
 
-        System.out.println("Enter the water consumption data: ");
-        double WaterConsumption = in.nextDouble();
+            //Verify reading card
 
+            if (in.hasNextDouble()) {
+                WaterConsumption = in.nextDouble();
+                System.out.printf("Water Used: %.3f", WaterConsumption);
+                isVerified = true;
+            }
+            else{
+                System.out.println("Wrong Data Type\nTry Again");
+                isVerified = false;
+                in.next();
+            }
+        }
+            return isVerified;
 
-    //Verify reading card
-    //public static void verifyReadingCard() {
-
-
-
+    }
+}
         //Push paid bills
 
         //Push unpaid bills
@@ -86,8 +111,7 @@ public class Main {
         //Send reading fee
 
         //Push Settlement Info
-    }
-}
+
 
 
 

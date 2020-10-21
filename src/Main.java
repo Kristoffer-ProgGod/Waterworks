@@ -116,10 +116,30 @@ public class Main {
 
 
 /*
-This is where the Calculate Settlements function will be
+This is where the Calculate Settlements function will be: 2.2, 2.3, 2.4
+
+//Pull water consumption from Database, which is in a float form, and then cast it to a double.
+Double waterConsumption = DB.getDisplayData();
+
+//Pull group-data from Database and assign it to a string.
+Int fldConsumerSegment = DB.getDisplayData();
+
+//Calculate settlements based on which consumer segment they are a part of.
+   If (fldConsumerSegment = 1)
+   Double settlementCalculated = waterConsumption * 1,25
+
+   else ff (fldConsumerSegment = 2)
+   Double settlementCalculated = waterConsumption * 1,12
+
+   else if (fldConsumerSegment = 3)
+   Double settlementCalculated = waterConsumption * 1,19
+
+   DB.insertSQL("INSERT INTO tblBills VALUES('settlementCalculated')");
  */
+
 
 
 /*
 This is where the Notify Consumer function will be
  */
+}

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="@">
+  <database-model serializer="dbm" dbms="MSSQL" family-id="MSSQL" format-version="4.19">
+    <root id="1">
+      <ServerVersion>15.0.2000</ServerVersion>
+    </root>
+    <database id="2" parent="1" name="Cars">
+      <ObjectId>5</ObjectId>
+      <Collation>Danish_Norwegian_CI_AS</Collation>
+    </database>
+    <database id="3" parent="1" name="Friends">
+      <ObjectId>6</ObjectId>
+      <Collation>Danish_Norwegian_CI_AS</Collation>
+    </database>
+    <database id="4" parent="1" name="dbClass">
+      <ObjectId>13</ObjectId>
+      <Collation>Danish_Norwegian_CI_AS</Collation>
+    </database>
+    <database id="5" parent="1" name="dbCompany">
+      <ObjectId>11</ObjectId>
+      <Collation>Danish_Norwegian_CI_AS</Collation>
+    </database>
+    <database id="6" parent="1" name="dbDSB">
+      <ObjectId>14</ObjectId>
+      <Collation>Danish_Norwegian_CI_AS</Collation>
+    </database>
+    <database id="7" parent="1" name="dbFestival">
+      <ObjectId>17</ObjectId>
+      <Collation>Danish_Norwegian_CI_AS</Collation>
+    </database>
+    <database id="8" parent="1" name="dbPhone">
+      <ObjectId>16</ObjectId>
+      <Collation>Danish_Norwegian_CI_AS</Collation>
+    </database>
+    <database id="9" parent="1" name="dbPoodles">
+      <ObjectId>7</ObjectId>
+      <Collation>Danish_Norwegian_CI_AS</Collation>
+    </database>
+    <database id="10" parent="1" name="dbRace">
+      <ObjectId>8</ObjectId>
+      <Collation>Danish_Norwegian_CI_AS</Collation>
+    </database>
+    <database id="11" parent="1" name="dbRunning">
+      <ObjectId>15</ObjectId>
+      <Collation>Danish_Norwegian_CI_AS</Collation>
+    </database>
+    <database id="12" parent="1" name="dbSolar">
+      <ObjectId>12</ObjectId>
+      <Collation>Danish_Norwegian_CI_AS</Collation>
+    </database>
+    <database id="13" parent="1" name="dbWaterworksAdministration">
+      <ObjectId>19</ObjectId>
+      <Current>1</Current>
+      <Collation>Danish_Norwegian_CI_AS</Collation>
+    </database>
+    <database id="14" parent="1" name="db_Library">
+      <ObjectId>10</ObjectId>
+      <Collation>Danish_Norwegian_CI_AS</Collation>
+    </database>
+    <database id="15" parent="1" name="db_d20">
+      <ObjectId>9</ObjectId>
+      <Collation>Danish_Norwegian_CI_AS</Collation>
+    </database>
+    <database id="16" parent="1" name="master">
+      <ObjectId>1</ObjectId>
+      <Collation>Danish_Norwegian_CI_AS</Collation>
+    </database>
+    <database id="17" parent="1" name="model">
+      <ObjectId>3</ObjectId>
+      <Collation>Danish_Norwegian_CI_AS</Collation>
+    </database>
+    <database id="18" parent="1" name="msdb">
+      <ObjectId>4</ObjectId>
+      <Collation>Danish_Norwegian_CI_AS</Collation>
+    </database>
+    <database id="19" parent="1" name="sample">
+      <ObjectId>18</ObjectId>
+      <Collation>Danish_Norwegian_CI_AS</Collation>
+    </database>
+    <database id="20" parent="1" name="tempdb">
+      <ObjectId>2</ObjectId>
+      <Collation>Danish_Norwegian_CI_AS</Collation>
+    </database>
+    <schema id="21" parent="13" name="INFORMATION_SCHEMA">
+      <ObjectId>3</ObjectId>
+    </schema>
+    <schema id="22" parent="13" name="db_accessadmin">
+      <ObjectId>16385</ObjectId>
+    </schema>
+    <schema id="23" parent="13" name="db_backupoperator">
+      <ObjectId>16389</ObjectId>
+    </schema>
+    <schema id="24" parent="13" name="db_datareader">
+      <ObjectId>16390</ObjectId>
+    </schema>
+    <schema id="25" parent="13" name="db_datawriter">
+      <ObjectId>16391</ObjectId>
+    </schema>
+    <schema id="26" parent="13" name="db_ddladmin">
+      <ObjectId>16387</ObjectId>
+    </schema>
+    <schema id="27" parent="13" name="db_denydatareader">
+      <ObjectId>16392</ObjectId>
+    </schema>
+    <schema id="28" parent="13" name="db_denydatawriter">
+      <ObjectId>16393</ObjectId>
+    </schema>
+    <schema id="29" parent="13" name="db_owner">
+      <ObjectId>16384</ObjectId>
+    </schema>
+    <schema id="30" parent="13" name="db_securityadmin">
+      <ObjectId>16386</ObjectId>
+    </schema>
+    <schema id="31" parent="13" name="dbo">
+      <ObjectId>1</ObjectId>
+      <Current>1</Current>
+    </schema>
+    <schema id="32" parent="13" name="guest">
+      <ObjectId>2</ObjectId>
+    </schema>
+    <schema id="33" parent="13" name="sys">
+      <ObjectId>4</ObjectId>
+    </schema>
+  </database-model>
+</dataSource>

@@ -6,9 +6,11 @@ used to call all the functions
  */
 
 public class Main {
+
+
     public static void main(String[] args) {
 
-        boolean readingCardReceived = false;
+        boolean readingCardReceived = readingCardReturned();
         boolean verificationStatus = false;
 
         if(readingCardReceived){
@@ -24,6 +26,28 @@ public class Main {
         }
       //  createConsumer();
 
+    }
+
+
+
+    public static boolean readingCardReturned() {
+        Scanner in = new Scanner(System.in);
+        boolean cardReturned = false, done = false;
+        String token ="";
+        System.out.println("Has the reading card been returned? Y/N");
+        while(!done) {
+            token = in.next();
+            if (token.toUpperCase().equals("Y")) {
+                cardReturned = true;
+                done = true;
+            } else if (token.toUpperCase().equals("N")) {
+                cardReturned = false;
+                done = true;
+            } else {
+                System.out.println("Please enter only Y or N");
+            }
+        }
+        return cardReturned;
     }
 
 
@@ -126,13 +150,13 @@ Int fldConsumerSegment = DB.getDisplayData();
 
 //Calculate settlements based on which consumer segment they are a part of.
    If (fldConsumerSegment = 1)
-   Double settlementCalculated = waterConsumption * 1,25
+   Double settlementCalculated = waterConsumption * 1.25
 
-   else ff (fldConsumerSegment = 2)
-   Double settlementCalculated = waterConsumption * 1,12
+   else if (fldConsumerSegment = 2)
+   Double settlementCalculated = waterConsumption * 1.12
 
    else if (fldConsumerSegment = 3)
-   Double settlementCalculated = waterConsumption * 1,19
+   Double settlementCalculated = waterConsumption * 1.19
 
    DB.insertSQL("INSERT INTO tblBills VALUES('settlementCalculated')");
  */
@@ -142,4 +166,3 @@ Int fldConsumerSegment = DB.getDisplayData();
 /*
 This is where the Notify Consumer function will be
  */
-}

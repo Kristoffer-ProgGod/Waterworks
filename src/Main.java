@@ -12,9 +12,8 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        createConsumer();
+        //createConsumer();
         boolean readingCardReceived = readingCardReturned(in);
-
         if (readingCardReceived) {
             enterReadingCard(in);
         }

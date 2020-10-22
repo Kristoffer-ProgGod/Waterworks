@@ -165,4 +165,25 @@ Int fldConsumerSegment = DB.getDisplayData();
 
 /*
 This is where the Notify Consumer function will be
+//Pull consumer and Settlement info for labels and invoice
+String consumerInfo = DB.getDisplayData();
+
+Double settlementInfo = DB.getDisplayData();
+
+//Pull reminder counter from Database
+String reminderCounter = DB.getDisplayData();
+
+DB.insertSQL("INSERT INTO tblReminders VALUES ('reminderCounter');
+
+//Set flat reminder fee + add reminder fee based on the counter
+double reminderFee = 1095,75
+double totalReminderFee = reminderCounter * reminderFee
+
+//(create giro fld??)
+
+//Print invoice
+
+//OR create reminder with labels, print the label after.
+
+
  */

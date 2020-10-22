@@ -1,5 +1,6 @@
 class cards {
     public static void main(String[] args) {
+
         System.out.println(" ---------------------------------------------------------------------------------------------------------");
         System.out.println("| UPTOWN WATERWORKS                                                           YOUR ACCOUNT NR.  : XXXXXXXX|");
         System.out.println("|                                                                             BILL NUMBER       : XXXXXXXX|");

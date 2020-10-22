@@ -156,14 +156,16 @@ Double waterConsumption = DB.getDisplayData();
 Int fldConsumerSegment = DB.getDisplayData();
 
 //Calculate settlements based on which consumer segment they are a part of.
+   double waterCost = 18 * waterConsumption
+
    If (fldConsumerSegment = 1)
-   Double settlementCalculated = waterConsumption * 1.25
+   Double settlementCalculated = waterCost * 1.25
 
    else if (fldConsumerSegment = 2)
-   Double settlementCalculated = waterConsumption * 1.12
+   Double settlementCalculated = waterCost * 1.12
 
    else if (fldConsumerSegment = 3)
-   Double settlementCalculated = waterConsumption * 1.19
+   Double settlementCalculated = waterCost * 1.19
 
    DB.insertSQL("INSERT INTO tblBills VALUES('settlementCalculated')");
  */

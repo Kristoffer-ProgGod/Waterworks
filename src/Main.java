@@ -9,13 +9,43 @@ public class Main {
 
 
     public static void main(String[] args) {
+        //declarations
+        Scanner in = new Scanner(System.in);
+        boolean menuDone = false;
 
-        createConsumer();
+        //User menu for administrating the Waterworks Administration System
+        System.out.println("User menu\n" +
+                "press 1 for creating a new consumer\n" +
+                "press 2 for entering reading card information\n" +
+                "press 3 for calculating settlements\n" +
+                "press 4 for updating consumer information\n");
+
+        do {
+            if(in.hasNextInt()){
+                int menuOption = in.nextInt();
+
+                switch (menuOption){
+                    case 1:
+                        createConsumer();
+                        break;
+                    case 2:
+                        enterReadingCard();
+                        break;
+                    case 3:
+
+                        break;
+
+
+                }
+            }
+
+
         boolean readingCardReceived = readingCardReturned();
         boolean verificationStatus = false;
 
         if (readingCardReceived) {
             verificationStatus = enterReadingCard();
+            pushBills();
         } else {
             //addReadingFee;
             //send staff member
@@ -25,7 +55,14 @@ public class Main {
             //send consumer info and water consumption data
         }
 
-    }
+
+
+    } while(!menuDone);
+
+        }
+
+
+
 
 
     public static boolean readingCardReturned() {
@@ -44,6 +81,12 @@ public class Main {
             } else {
                 System.out.println("Please enter only Y or N");
             }
+        }
+        if(!cardReturned){
+            DB.insertSQL("insert into tblReadingCard(fldIsReturned)values(1)");
+        }
+        else{
+            DB.insertSQL("insert into tblReadingCard(fldIsReturned)values(0)");
         }
         return cardReturned;
     }
@@ -107,8 +150,11 @@ public class Main {
     public static boolean enterReadingCard() {
         boolean isVerified = false;
         double waterConsumption = 0;
+        int conID = 0;
         Scanner in = new Scanner(System.in);
         while (!isVerified) {
+            System.out.println("Enter ConsumerID");
+            conID = in.nextInt();
             System.out.println("Enter the water consumption data: ");
             System.out.println("Water Used");
 
@@ -117,6 +163,7 @@ public class Main {
             if (in.hasNextDouble()) {
                 waterConsumption = in.nextDouble();
                 System.out.printf("Water Used: %.3f", waterConsumption);
+                System.out.println();
                 isVerified = true;
             } else {
                 System.out.println("Wrong Data Type\nTry Again");
@@ -125,23 +172,52 @@ public class Main {
             }
         }
         //insert Water consumption data into the system
-        DB.insertSQL("Insert into tblReadingCard (fldWaterConsumption) values (" + waterConsumption + ")");
+        DB.insertSQL("Insert tblReadingCard(fldConsumerID, fldWaterConsumption, fldDrainageWaterConsumption) values(" + conID + ")");
         return isVerified;
 
     }
 
-    //Push paid bills
+    //Check whether the consumer has paid the bill and push this information into the database
+    public static boolean pushBills() {
+        Scanner in = new Scanner(System.in);
+        boolean billPaid = false, done = false;
+        String token;
+        System.out.println("Has the consumer paid the bill? Y/N");
+        while (!done) {
+            token = in.next();
+            if (token.toUpperCase().equals("Y")) {
+                billPaid = true;
+                done = true;
+            } else if (token.toUpperCase().equals("N")) {
+                billPaid = false;
+                done = true;
+            } else {
+                System.out.println("Please enter only Y or N");
+            }
+        }
 
-    //Push unpaid bills
-
-    //Send reading fee
-
-    //Push Settlement Info
-
-
-
-
+        if(billPaid)
+        {
+            DB.insertSQL("insert into tblBills(fldBillPaid) values(0)");
+        }
+        else {
+            DB.insertSQL("insert into tblBills(fldBillPaid) values(1)");
+        }
+        return billPaid;
     }
+
+
+        //Send reading fee
+
+        }
+
+
+
+
+        //Push Settlement Info
+
+
+
 
 
 

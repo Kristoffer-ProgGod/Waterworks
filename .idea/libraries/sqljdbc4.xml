@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="sqljdbc4">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../javaAndSQLProject/sqljdbc4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../DatabaseProjekt/sqljdbc4.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

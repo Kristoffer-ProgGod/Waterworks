@@ -83,8 +83,12 @@ public class Main {
             System.out.println("Company Name");
             companyName = in.nextLine();
             consumer = "Name: " + name + "\nAddress: " + address + "\nTelephone Number: " + telephoneNo + "\nEmail: " + email + "\nCompany Name: " + companyName;
+            DB.insertSQL("insert into tblConsumer(fldConsumerSegment, fldName, fldAddress, fldPhoneNo, fldEmail, fldCompanyname) values(" +
+                    "'"+ type + "', '" + name + "', '" + address + "', '" + telephoneNo + "', '" + email + "', '" + companyName + "')");
         } else {
             consumer = "Name: " + name + "\nAddress: " + address + "\nTelephone Number: " + telephoneNo + "\nEmail: " + email;
+            DB.insertSQL("insert into tblConsumer(fldConsumerSegment, fldName, fldAddress, fldPhoneNo, fldEmail) values(" +
+                    "'"+ type + "', '" + name + "', '" + address + "', '" + telephoneNo + "', '" + email + "')");
         }
         System.out.println(consumer);
 

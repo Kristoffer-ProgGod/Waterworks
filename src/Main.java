@@ -146,35 +146,48 @@ public class Main {
 
 
 
-/*
-This is where the Calculate Settlements function will be: 2.2, 2.3, 2.4
+
+//This is where the Calculate Settlements function will be: 2.2, 2.3, 2.4
 
 //Pull water consumption from Database, which is in a float form, and then cast it to a double.
-Double waterConsumption = DB.getDisplayData();
+DB.selectSQL("SELECT fldWaterConsumption FROM tblReadingCards WHERE fldConsumerID=" + selectVariable + "");
+double waterConsumption = DB.getDisplayData();
+
+DB.selectSQL("SELECT fldDrainageWaterConsumption FROM tblReadingCards WHERE fldConsumerID=" + selectVariable + "");
+double drainageWaterConsumption = DB.getDisplayData();
+
+DB.selectSQL("SELECT fldWaterConsumption AND fldDrainageWaterConsumption FROM tblReadingCards WHERE fldConsumerID=" + selectVariable + "");
+double totalWaterConsumption = DB.getDisplayData();
 
 //Pull group-data from Database and assign it to a string.
-Int fldConsumerSegment = DB.getDisplayData();
+DB.selectSQL("SELECT fldConsumerSegment FROM tblConsumer WHERE fldConsumerID=" + selectVariable + "");
+String fldConsumerSegment = DB.getDisplayData();
 
-//Calculate settlements based on which consumer segment they are a part of.
+//Calculate water cost based on consumption and a hardcoded rate. Settlements are then calculated based on which consumer segment they are a part of.
    double waterCost = 18 * waterConsumption
 
-   If (fldConsumerSegment = 1)
-   Double settlementCalculated = waterCost * 1.25
+//Calculate water cost plus drainage water consumption, then tax based on customer segment
+waterCost+=drainageWaterConsumption * 32
 
-   else if (fldConsumerSegment = 2)
-   Double settlementCalculated = waterCost * 1.12
+   If (fldConsumerSegment = "1")
+   double settlementCalculated = waterCost * 1.25
 
-   else if (fldConsumerSegment = 3)
-   Double settlementCalculated = waterCost * 1.19
+   else if (fldConsumerSegment = "2")
+   double settlementCalculated = waterCost * 1.12
 
-   DB.insertSQL("INSERT INTO tblBills VALUES('settlementCalculated')");
- */
+   else if (fldConsumerSegment = "3")
+   double settlementCalculated = waterCost * 1.19
+
+//Insert newly calculated settlement data into SQL Database.
+   DB.insertSQL("INSERT INTO tblBills(fldSettlement) VALUES('"+settlementCalculated +"')");
 
 
 
-/*
-This is where the Notify Consumer function will be
+
+
+//This is where the Notify Consumer function will be
 //Pull consumer and Settlement info for labels and invoice
+DB.selectSQL("SELECT * FROM tblConsumer WHERE fldConsumerID=" + selectVariable + "");
 String consumerInfo = DB.getDisplayData();
 
 Double settlementInfo = DB.getDisplayData();
@@ -185,7 +198,7 @@ String reminderCounter = DB.getDisplayData();
 DB.insertSQL("INSERT INTO tblReminders VALUES ('reminderCounter');
 
 //Set flat reminder fee + add reminder fee based on the counter
-double reminderFee = 1095,75
+double reminderFee = 200
 double totalReminderFee = reminderCounter * reminderFee
 
 //(create giro fld??)
@@ -195,4 +208,4 @@ double totalReminderFee = reminderCounter * reminderFee
 //OR create reminder with labels, print the label after.
 
 
- */
+

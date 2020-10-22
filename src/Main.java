@@ -10,18 +10,17 @@ public class Main {
 
     public static void main(String[] args) {
 
-       createConsumer();
+        createConsumer();
         boolean readingCardReceived = readingCardReturned();
         boolean verificationStatus = false;
 
-        if(readingCardReceived){
+        if (readingCardReceived) {
             verificationStatus = enterReadingCard();
-        }
-        else{
+        } else {
             //addReadingFee;
             //send staff member
         }
-        if(verificationStatus){
+        if (verificationStatus) {
             //insert data
             //send consumer info and water consumption data
         }
@@ -29,13 +28,12 @@ public class Main {
     }
 
 
-
     public static boolean readingCardReturned() {
         Scanner in = new Scanner(System.in);
         boolean cardReturned = false, done = false;
-        String token ="";
+        String token = "";
         System.out.println("Has the reading card been returned? Y/N");
-        while(!done) {
+        while (!done) {
             token = in.next();
             if (token.toUpperCase().equals("Y")) {
                 cardReturned = true;
@@ -84,11 +82,11 @@ public class Main {
             companyName = in.nextLine();
             consumer = "Name: " + name + "\nAddress: " + address + "\nTelephone Number: " + telephoneNo + "\nEmail: " + email + "\nCompany Name: " + companyName;
             DB.insertSQL("insert into tblConsumer(fldConsumerSegment, fldName, fldAddress, fldPhoneNo, fldEmail, fldCompanyname) values(" +
-                    "'"+ type + "', '" + name + "', '" + address + "', '" + telephoneNo + "', '" + email + "', '" + companyName + "')");
+                    "'" + type + "', '" + name + "', '" + address + "', '" + telephoneNo + "', '" + email + "', '" + companyName + "')");
         } else {
             consumer = "Name: " + name + "\nAddress: " + address + "\nTelephone Number: " + telephoneNo + "\nEmail: " + email;
             DB.insertSQL("insert into tblConsumer(fldConsumerSegment, fldName, fldAddress, fldPhoneNo, fldEmail) values(" +
-                    "'"+ type + "', '" + name + "', '" + address + "', '" + telephoneNo + "', '" + email + "')");
+                    "'" + type + "', '" + name + "', '" + address + "', '" + telephoneNo + "', '" + email + "')");
         }
         System.out.println(consumer);
 
@@ -110,7 +108,7 @@ public class Main {
         boolean isVerified = false;
         double WaterConsumption = 0;
         Scanner in = new Scanner(System.in);
-        while(!isVerified) {
+        while (!isVerified) {
             System.out.println("Enter the water consumption data: ");
             System.out.println("Water Used");
 
@@ -120,25 +118,29 @@ public class Main {
                 WaterConsumption = in.nextDouble();
                 System.out.printf("Water Used: %.3f", WaterConsumption);
                 isVerified = true;
-            }
-            else{
+            } else {
                 System.out.println("Wrong Data Type\nTry Again");
                 isVerified = false;
                 in.next();
             }
         }
         DB.insertSQL("Insert into tblReadingCard (Col3) values (" + WaterConsumption + ")");
-            return isVerified;
+        return isVerified;
+
+    }
+
+    //Push paid bills
+
+    //Push unpaid bills
+
+    //Send reading fee
+
+    //Push Settlement Info
+    public static void SettlementInfo() {
+
 
     }
 }
-        //Push paid bills
-
-        //Push unpaid bills
-
-        //Send reading fee
-
-        //Push Settlement Info
 
 
 

@@ -6,3 +6,5 @@
 /dataSources.local.xml
 # Editor-based HTTP Client requests
 /httpRequests/
+# Our properties file
+C:\Users\Kristoffer\IdeaProjects\WaterWorks\db.properties

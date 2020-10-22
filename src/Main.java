@@ -10,6 +10,7 @@ public class Main {
 
     public static void main(String[] args) {
 
+       createConsumer();
         boolean readingCardReceived = readingCardReturned();
         boolean verificationStatus = false;
 
@@ -24,7 +25,6 @@ public class Main {
             //insert data
             //send consumer info and water consumption data
         }
-      //  createConsumer();
 
     }
 
@@ -64,17 +64,16 @@ public class Main {
         System.out.println("Please enter the consumer info");
         System.out.println("Name");
         name = in.nextLine();
+        System.out.println("Address");
+        address = in.nextLine();
         System.out.println("Consumer type");
         type = in.nextInt();
 
         /*
         For some reason the address does not work with the in.nextLine() function
-        so we are using string concatenation
+        so we are using string concatenation. It was fixed when moved above the consumer type
         */
-        System.out.println("Road Name");
-        address = in.next();
-        System.out.println("House Number");
-        address += " " + in.next();
+
         System.out.println("Email");
         email = in.next();
         System.out.println("Telephone Number");
@@ -82,7 +81,7 @@ public class Main {
 
         if (type != 1) {
             System.out.println("Company Name");
-            companyName = in.next();
+            companyName = in.nextLine();
             consumer = "Name: " + name + "\nAddress: " + address + "\nTelephone Number: " + telephoneNo + "\nEmail: " + email + "\nCompany Name: " + companyName;
         } else {
             consumer = "Name: " + name + "\nAddress: " + address + "\nTelephone Number: " + telephoneNo + "\nEmail: " + email;
@@ -124,6 +123,7 @@ public class Main {
                 in.next();
             }
         }
+        DB.insertSQL("Insert into tblReadingCard (Col3) values (" + WaterConsumption + ")");
             return isVerified;
 
     }

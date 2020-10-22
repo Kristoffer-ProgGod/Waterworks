@@ -6,6 +6,7 @@
       <synchronize>true</synchronize>
       <jdbc-driver>com.microsoft.sqlserver.jdbc.SQLServerDriver</jdbc-driver>
       <jdbc-url>jdbc:sqlserver://localhost:1433;database=dbWaterworksAdministration</jdbc-url>
+      <auto-close enable="true" timeout="60" />
     </data-source>
   </component>
 </project>

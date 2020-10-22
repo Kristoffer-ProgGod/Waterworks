@@ -193,7 +193,8 @@ String consumerInfo = DB.getDisplayData();
 Double settlementInfo = DB.getDisplayData();
 
 //Pull reminder counter from Database
-String reminderCounter = DB.getDisplayData();
+DB.selectSQL("SELECT ")
+Int reminderCounter = DB.getDisplayData();
 
 DB.insertSQL("INSERT INTO tblReminders VALUES ('reminderCounter');
 

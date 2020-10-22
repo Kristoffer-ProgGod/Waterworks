@@ -106,7 +106,7 @@ public class Main {
      */
     public static boolean enterReadingCard() {
         boolean isVerified = false;
-        double WaterConsumption = 0;
+        double waterConsumption = 0;
         Scanner in = new Scanner(System.in);
         while (!isVerified) {
             System.out.println("Enter the water consumption data: ");
@@ -115,8 +115,8 @@ public class Main {
             //Verify reading card
 
             if (in.hasNextDouble()) {
-                WaterConsumption = in.nextDouble();
-                System.out.printf("Water Used: %.3f", WaterConsumption);
+                waterConsumption = in.nextDouble();
+                System.out.printf("Water Used: %.3f", waterConsumption);
                 isVerified = true;
             } else {
                 System.out.println("Wrong Data Type\nTry Again");
@@ -124,7 +124,8 @@ public class Main {
                 in.next();
             }
         }
-        DB.insertSQL("Insert into tblReadingCard (Col3) values (" + WaterConsumption + ")");
+        //insert Water consumption data into the system
+        DB.insertSQL("Insert into tblReadingCard (fldWaterConsumption) values (" + waterConsumption + ")");
         return isVerified;
 
     }
@@ -136,12 +137,12 @@ public class Main {
     //Send reading fee
 
     //Push Settlement Info
-    public static void SettlementInfo() {
+
 
 
 
     }
-}
+
 
 
 

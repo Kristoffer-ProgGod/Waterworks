@@ -1,3 +1,5 @@
+import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
+
 import java.util.Scanner;
 
 /*
@@ -9,37 +11,30 @@ public class Main {
 
 
     public static void main(String[] args) {
-
+        Scanner in = new Scanner(System.in);
         createConsumer();
-        boolean readingCardReceived = readingCardReturned();
-        boolean verificationStatus = false;
+        boolean readingCardReceived = readingCardReturned(in);
 
         if (readingCardReceived) {
-            verificationStatus = enterReadingCard();
-        } else {
-            //addReadingFee;
+            enterReadingCard(in);
+        }
+        else {
+            addReadingFee(in);
             //send staff member
         }
-        if (verificationStatus) {
-            //insert data
-            //send consumer info and water consumption data
-        }
-
     }
 
 
-    public static boolean readingCardReturned() {
-        Scanner in = new Scanner(System.in);
+    public static boolean readingCardReturned(Scanner cardRead) {
         boolean cardReturned = false, done = false;
-        String token = "";
+        String token;
         System.out.println("Has the reading card been returned? Y/N");
         while (!done) {
-            token = in.next();
+            token = cardRead.next();
             if (token.toUpperCase().equals("Y")) {
                 cardReturned = true;
                 done = true;
             } else if (token.toUpperCase().equals("N")) {
-                cardReturned = false;
                 done = true;
             } else {
                 System.out.println("Please enter only Y or N");
@@ -104,29 +99,47 @@ public class Main {
     Receive reading card
     A reading card is entered into the system
      */
-    public static boolean enterReadingCard() {
+    public static void enterReadingCard(Scanner scanner) {
+        double waterConsumption = 0, drainageWaterConsumption = 0;
         boolean isVerified = false;
-        double WaterConsumption = 0;
-        Scanner in = new Scanner(System.in);
+        int conID=0;
         while (!isVerified) {
+            System.out.println("Enter ConsumerID");
+            conID = scanner.nextInt();
             System.out.println("Enter the water consumption data: ");
             System.out.println("Water Used");
-
             //Verify reading card
 
-            if (in.hasNextDouble()) {
-                WaterConsumption = in.nextDouble();
-                System.out.printf("Water Used: %.3f", WaterConsumption);
+            if (scanner.hasNextDouble()) {
+                waterConsumption = scanner.nextDouble();
+                System.out.printf("Water Used: %.3f\n", waterConsumption);
                 isVerified = true;
             } else {
                 System.out.println("Wrong Data Type\nTry Again");
                 isVerified = false;
-                in.next();
+                scanner.next();
             }
         }
-        DB.insertSQL("Insert into tblReadingCard (Col3) values (" + WaterConsumption + ")");
-        return isVerified;
+        //isVerified is reset so it can be reused for the second entry
+        isVerified=false;
+        while(!isVerified){
+            System.out.println("Drainage Water");
 
+            //Enter Drainage Water Stats
+            if(scanner.hasNextDouble()){
+                drainageWaterConsumption = scanner.nextDouble();
+                System.out.printf("Water Used: %.3f\n", drainageWaterConsumption);
+                isVerified = true;
+            }
+            else{
+                System.out.println("Wrong  Data Type\nTry Again");
+                isVerified = false;
+                scanner.next();
+            }
+
+        }
+        DB.insertSQL("Insert into tblReadingCard (fldConsumerID, fldWaterConsumption, fldDrainageWaterConsumption)" +
+                " values ("+ conID + "," + waterConsumption + "," + drainageWaterConsumption+")");
     }
 
     //Push paid bills
@@ -134,9 +147,14 @@ public class Main {
     //Push unpaid bills
 
     //Send reading fee
+    public static void addReadingFee(Scanner ID){
+        System.out.println("Enter ConsumerID");
+        DB.updateSQL("Update tblBills set fldReadingFees = 200 where fldConsumerID= " + ID.nextInt());
+
+    }
 
     //Push Settlement Info
-    public static void SettlementInfo() {
+    public static void pushSettlementInfo() {
 
 
 

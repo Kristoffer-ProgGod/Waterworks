@@ -18,7 +18,8 @@ public class Main {
                 "1: create a new consumer\n" +
                 "2: enter reading card information\n" +
                 "3: calculate settlements\n" +
-                "4: update consumer information\n";
+                "4: update consumer information\n" +
+                "5: get statistics\n";
 
         do {
             System.out.print(menu);
@@ -39,6 +40,8 @@ public class Main {
                     case 4:
 
                     case 5:
+                        statistics(in);
+                    case 6:
                         menuDone = true;
                         break;
                 }
@@ -131,9 +134,12 @@ public class Main {
     public static boolean enterReadingCard(Scanner scanner) {
         boolean isVerified = false;
         double waterConsumption = 0, drainageWaterConsumption = 0, totalWaterConsumption = 0;
-        int conID = 0;
+        int conID = 0, segment = 0;
         System.out.println("Enter ConsumerID");
         conID = scanner.nextInt();
+        DB.selectSQL("Select fldConsumerSegment from tblConsumer where fldConsumerID="+conID);
+        segment = Integer.parseInt(DB.getData());
+
         while (!isVerified) {
             System.out.println("Enter the water consumption data: ");
             System.out.println("Water Used");
@@ -158,8 +164,8 @@ public class Main {
 
         }
         //insert Water consumption data into the system
-        DB.insertSQL("Insert tblReadingCard(fldConsumerID, fldWaterConsumption, fldDrainageWaterConsumption, fldTotalWaterConsumption)" +
-                " values(" + conID + "," + waterConsumption + "," + drainageWaterConsumption + "," + totalWaterConsumption + ")");
+        DB.insertSQL("Insert tblReadingCard(fldConsumerID, fldWaterConsumption, fldDrainageWaterConsumption, fldTotalWaterConsumption, fldConsumerSegment)" +
+                " values(" + conID + "," + waterConsumption + "," + drainageWaterConsumption + "," + totalWaterConsumption + "," + segment + ")");
         return isVerified;
 
     }
@@ -295,5 +301,56 @@ This is where the Notify Consumer function will be
                 System.out.print(data);
             }
         } while(true);
+    }
+
+    public static void statistics(Scanner scanner) {
+
+        System.out.println("Input Segment");
+        int segment = scanner.nextInt();
+        String average, minimum, maximum, sum, count;
+
+
+        DB.selectSQL("Select AVG(fldWaterConsumption) from tblReadingCard where fldConsumerSegment = " + segment);
+        average = "Average for \nWater Consumption: " + DB.getDisplayData();
+        DB.selectSQL("Select AVG(fldDrainageWaterConsumption) from tblReadingCard where fldConsumerSegment = " + segment);
+        average += "Drainage Water Consumption: " + DB.getDisplayData();
+        DB.selectSQL("Select AVG(fldTotalWaterConsumption) from tblReadingCard where fldConsumerSegment = "+ segment);
+        average += "Total Water Consumption: " + DB.getDisplayData();
+
+        System.out.println(average);
+
+        DB.selectSQL("Select SUM(fldWaterConsumption) from tblReadingCard where fldConsumerSegment = " + segment);
+        sum = "Sum for\nWater Consumption: "+ DB.getDisplayData();
+        DB.selectSQL("Select SUM(fldDrainageWaterConsumption) from tblReadingCard where fldConsumerSegment = " + segment);
+        sum += "Drainage Water Consumption: " + DB.getDisplayData();
+        DB.selectSQL("Select SUM(fldTotalWaterConsumption) from tblReadingCard where fldConsumerSegment = " + segment);
+        sum += "Total Water Consumption: " + DB.getDisplayData();
+
+        System.out.println(sum);
+
+        DB.selectSQL("Select Count(fldConsumerID) from tblConsumer where fldConsumerSegment= " + segment);
+        count = "Total Consumers in Segment: " + DB.getDisplayData();
+        System.out.println(count);
+
+
+        DB.selectSQL("Select MIN(fldWaterConsumption) from tblReadingCard where fldConsumerSegment = " + segment );
+        minimum = "Minimum for\nWater Consumption: " + DB.getDisplayData();
+        DB.selectSQL("Select MIN(fldDrainageWaterConsumption) from tblReadingCard where fldConsumerSegment = " + segment);
+        minimum += "Drainage Water Consumption: " + DB.getDisplayData();
+        DB.selectSQL("Select MIN(fldTotalWaterConsumption) from tblReadingCard where fldConsumerSegment = "+ segment);
+        minimum += "Total Water Consumption: " + DB.getDisplayData();
+
+        System.out.println(minimum);
+
+        DB.selectSQL("Select MAX(fldWaterConsumption) from tblReadingCard where fldConsumerSegment = " + segment);
+        maximum = "Maximum for\nWater Consumption: " + DB.getDisplayData();
+        DB.selectSQL("Select MAX(fldDrainageWaterConsumption) from tblReadingCard where fldConsumerSegment = " + segment);
+        maximum += "Drainage Water Consumption: " + DB.getDisplayData();
+        DB.selectSQL("Select MAX(fldTotalWaterConsumption) from tblReadingCard where fldConsumerSegment = "+ segment);
+        maximum += "Total Water Consumption: " + DB.getDisplayData();
+
+        System.out.println(maximum);
+
+
     }
 }

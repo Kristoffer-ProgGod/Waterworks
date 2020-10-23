@@ -304,6 +304,10 @@ public class Main {
     /**
      * updates database with reminder fees if the bills have not been paid
      * and updates the reminder counter to keep track of how many have been sent
+     *
+     * For some reason when run we get the error code "Invalid column name 'fldReminderID'."
+     * But the method still updates the reminder counter as intended and keeps running.
+     *
      * @param scanner takes input
      */
     public static void notifyConsumer(Scanner scanner) {
@@ -315,18 +319,18 @@ public class Main {
 
 
         //Pull consumer and Settlement info for labels and invoice
-        DB.selectSQL("SELECT fldReminderCounter FROM tblReminders WHERE fldConsumerID=" + consumerID + " and fldReminderID = " + reminderID);
+        DB.selectSQL("SELECT fldReminderCounter FROM tblReminders WHERE fldConsumerID=" + consumerID + " and fldReminderID= " + reminderID);
         reminderCounter = Integer.parseInt(DB.getData());
         clearData();
 
         //Pull reminder counter from Database
-        DB.updateSQL("Update tblReminders set fldReminderCounter = " + (reminderCounter + 1) + " where fldConsumerID = " + consumerID  +
-                " and fldReminderID = " + reminderID);
+        DB.updateSQL("Update tblReminders set fldReminderCounter = " + (reminderCounter + 1) + " where fldConsumerID= " + consumerID  +
+                " and fldReminderID= " + reminderID);
         //Set flat reminder fee + add reminder fee based on the counter
         double reminderFee = 200;
         double totalReminderFee = (reminderCounter +1) * reminderFee;
-        DB.updateSQL("Update tblBills set fldReminderFees = " + totalReminderFee + " where fldConsumerID = " + consumerID +
-                " and fldReminderID = " + reminderID);
+        DB.updateSQL("Update tblBills set fldReminderFees = " + totalReminderFee + " where fldConsumerID= " + consumerID +
+                " and fldReminderID= " + reminderID);
     }
 
     /**

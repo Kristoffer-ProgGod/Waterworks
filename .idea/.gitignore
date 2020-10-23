@@ -1,11 +1,8 @@
 # Default ignored files
 /shelf/
 /workspace.xml
-/db.properties
 # Datasource local storage ignored files
 /../../../../../../:\Users\Kristoffer\IdeaProjects\WaterWorks\.idea/dataSources/
 /dataSources.local.xml
 # Editor-based HTTP Client requests
 /httpRequests/
-# Our properties file
-:\Users\Kristoffer\IdeaProjects\WaterWorks\db.properties

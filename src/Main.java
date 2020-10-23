@@ -229,12 +229,12 @@ public class Main {
         //Use for statistics
         DB.selectSQL("SELECT fldTotalWaterConsumption FROM tblReadingCard WHERE fldConsumerID=" + consumerID + " and fldReadingCardID =" + readingCardID);
         totalWaterConsumption = Double.parseDouble(DB.getData());
-
+        clearData();
 
 //        String temp;
 //        while (!(temp = DB.getData()).equals(DB.NOMOREDATA) ){
 //            totalWaterConsumption += Double.parseDouble(temp);
-//        }
+//       }
 
 
         //Pull group-data from Database and assign it to a string.
@@ -244,7 +244,7 @@ public class Main {
         */
         waterCost = 18 * waterConsumption;
 
-    //Calculate water cost plus drainage water consumption, then tax based on customer segment
+        //Calculate water cost plus drainage water consumption, then tax based on customer segment
         waterCost += drainageWaterConsumption * 32;
 
         switch(fldConsumerSegment){
@@ -268,40 +268,32 @@ public class Main {
 This is where the Notify Consumer function will be
     public static void notifyConsumer(Scanner scanner){
         int consumerID;
-
         System.out.println("Input ConsumerID");
         consumerID = scanner.nextInt();
-
-
 //Pull consumer and Settlement info for labels and invoice
         DB.selectSQL("SELECT * FROM tblConsumer WHERE fldConsumerID=" + consumerID +"");
         String consumerInfo = DB.getDisplayData();
-
         String settlementInfo = DB.getDisplayData();
-
 //Pull reminder counter from Database
         DB.selectSQL("SELECT ")
         int reminderCounter = DB.getDisplayData();
-
         DB.insertSQL("INSERT INTO tblReminders VALUES ('reminderCounter');
-
 //Set flat reminder fee + add reminder fee based on the counter
         double reminderFee = 200;
         double totalReminderFee = reminderCounter * reminderFee;
-
 //(create giro fld??)
-
 //Print invoice
-
 //OR create reminder with labels, print the label after.
     }
  */
+    public static void clearData(){
+        do{
+            String data = DB.getDisplayData();
+            if (data.equals(DB.NOMOREDATA)){
+                break;
+            }else{
+                System.out.print(data);
+            }
+        } while(true);
+    }
 }
-
-
-
-
-
-
-
-
